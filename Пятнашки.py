@@ -31,7 +31,6 @@ purple = (160,32,240)
 DarkGreen = (0,128,0)
 color = (150,150,250)
 
-# Установка ширины и высоты экрана [ширина, высота]
 size = [505,520]
 screen = pygame.display.set_mode(size)
 done2 = True
@@ -58,7 +57,6 @@ while done2 == True:
             xx = 5
     summ = 1
     mass = [i+1 for i in range(16)]
-    #mass[14],mass[15] = mass[15],mass[14]
     while summ%2 != 0:
         random.shuffle(mass)
         e = (mass.index(16) + 1) // 4
@@ -74,18 +72,16 @@ while done2 == True:
             summ += k
             k = 0
     pust = mass.index(16)
-    # Устанавливаем заголовок окна
+    
     pygame.display.set_caption('Пятнашки')
 
     mus = pygame.mixer.Sound('1380.wav')
 
     done = True
 
-    # Используется для контроля частоты обновления экрана
     clock = pygame.time.Clock()
 
     while done:
-        # ОБРАБОТКА ВСЕХ СОБЫТИЙ ДОЛЖНА БЫТЬ ПОД ЭТИМ КОММЕНТАРИЕМ
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = False
@@ -103,10 +99,6 @@ while done2 == True:
                                 mus.play()
                                 count += 1
 
-        # ОБРАБОТКА ВСЕХ СОБЫТИЙ ДОЛЖНА НАХОДИТЬСЯ НАД ЭТИМ КОММЕНТАРИЕМ
-
-        # ВСЯ ИГРОВАЯ ЛОГИКА ДОЛЖНА НАХОДИТЬСЯ ПОД ЭТИМ КОММЕНТАРИЕМ
-
         pos = pygame.mouse.get_pos()
         x_mouse = pos[0]
         y_mouse = pos[1]
@@ -119,13 +111,9 @@ while done2 == True:
         minutes = total_sec // 60
         seconds = total_sec % 60
         time_output = 'Время: {0:02}:{1:02}'.format(minutes, seconds)
-
-        # ВСЯ ИГРОВАЯ ЛОГИКА ДОЛЖНА НАХОДИТЬСЯ НАД ЭТИМ КОММЕНТАРИЕМ
-
-        # Очистить экран и установить фон
+        
         screen.fill(fon)
 
-        # ВЕСЬ КОД ДЛЯ РИСОВАНИЯ ДОЛЖЕН НАХОДИТЬСЯ ПОД ЭТИМ КОММЕНТАРИЕМ
         for i in range(16):
             if i != pust:
                 pygame.draw.rect(screen,color,[x[i],y[i],rebro,rebro],0)
@@ -150,19 +138,14 @@ while done2 == True:
         text = font.render(time_output,True, white)
         screen.blit(text,[390,503])
 
-        # ВЕСЬ КОД ДЛЯ РИСОВАНИЯ ДОЛЖЕН НАХОДИТЬСЯ НАД ЭТИМ КОММЕНТАРИЕМ
-
         if win == 1:
             Win(screen)
 
         if win != 1:
             time += 1
 
-
-        # Обновить экран, выведя то, что мы нарисовали
         pygame.display.flip()
 
-        # Ограничить до 20 кадров в секунду
         clock.tick(60)
-#Закрывть окно и выйти
+
 pygame.quit()
